@@ -430,13 +430,13 @@ function SellToPed(ped)
     local coords = GetOffsetFromEntityInWorldCoords(StandObject, OffsetData.x, OffsetData.y, OffsetData.z)
     local pedCoords = GetEntityCoords(ped)
     local pedDist = #(coords - pedCoords)
-    local playercoords = GetEntityCoords(PlayerPedId()
+    local playercoords = GetEntityCoords(PlayerPedId())
     local PlayerDist = #(playercoords - coords)
 
     TaskGoStraightToCoord(ped, coords, 1.2, -1, 0.0, 0.0)
 
     while pedDist > OffsetData.Distance do
-        local playercoords = GetEntityCoords(PlayerPedId()
+        local playercoords = GetEntityCoords(PlayerPedId())
         coords = GetOffsetFromEntityInWorldCoords(StandObject, OffsetData.x, OffsetData.y, OffsetData.z)
         PlayerDist = #(playercoords - coords)
         pedCoords = GetEntityCoords(ped)    
@@ -469,7 +469,7 @@ function SellToPed(ped)
     SellingData.Target = ped
 
     while pedDist < OffsetData.Distance and SellingData.HasTarget do
-        local playercoords = GetEntityCoords(PlayerPedId()
+        local playercoords = GetEntityCoords(PlayerPedId())
         coords = GetOffsetFromEntityInWorldCoords(StandObject, OffsetData.x, OffsetData.y, OffsetData.z)
         PlayerDist = #(playercoords - coords)
         pedCoords = GetEntityCoords(ped)
