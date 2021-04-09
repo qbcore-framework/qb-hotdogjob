@@ -147,7 +147,7 @@ Citizen.CreateThread(function()
                     if not IsWorking then
                         if distance < OffsetData.Distance then
                             DrawText3Ds(v.coords.x, v.coords.y, v.coords.z, "[E] Start Working")
-                            if IsControlJustPressed(0, Keys["E"]) then
+                            if IsControlJustPressed(0, 38) then
                                 StartWorking()
                             end
                         elseif distance < 3 then
@@ -156,7 +156,7 @@ Citizen.CreateThread(function()
                     else
                         if distance < OffsetData.Distance then
                             DrawText3Ds(v.coords.x, v.coords.y, v.coords.z, "[E] Stop Working")
-                            if IsControlJustPressed(0, Keys["E"]) then
+                            if IsControlJustPressed(0, 38) then
                                 StopWorking()
                             end
                         elseif distance < 3 then
@@ -228,7 +228,7 @@ function HotdogLoop()
                     if ObjectDistance < 1.0 then
                         if not IsPushing then
                             DrawText3Ds(ObjectOffset.x, ObjectOffset.y, ObjectOffset.z, '[G] Grab Stall')
-                            if IsControlJustPressed(0, Keys["G"]) then
+                            if IsControlJustPressed(0, 47) then
                                if SellingData.Enabled then
                                     if SellingData.Target ~= nil then
                                         SetPedKeepTask(SellingData.Target, false)
@@ -246,7 +246,7 @@ function HotdogLoop()
                             end
                         else
                             DrawText3Ds(ObjectOffset.x, ObjectOffset.y, ObjectOffset.z, '[G] Release Stall')
-                            if IsControlJustPressed(0, Keys["G"]) then
+                            if IsControlJustPressed(0, 47) then
                                 LetKraamLose()
                             end
                         end
@@ -289,7 +289,7 @@ function HotdogLoop()
                         else
                             DrawText3Ds(ObjectOffset.x, ObjectOffset.y, ObjectOffset.z, '[E] Hotdog prepare [Sale: ~r~Not Selling~w~]')
                         end
-                        if IsControlJustPressed(0, Keys["E"]) then
+                        if IsControlJustPressed(0, 38) then
                             StartHotdogMinigame()
                         end
                     end
@@ -494,7 +494,7 @@ function SellToPed(ped)
                 end
               
                 QBCore.Functions.DrawText3D(pedCoords.x, pedCoords.y, pedCoords.z, '[7] Sale '..HotdogsForSale..'x in front of $'..(HotdogsForSale * SellingPrice)..',- / [8] Reject')
-                if IsControlJustPressed(0, Keys["7"]) or IsDisabledControlJustPressed(0, Keys["7"]) then
+                if IsControlJustPressed(0, 161) or IsDisabledControlJustPressed(0, 161) then
                     QBCore.Functions.Notify(HotdogsForSale..'x Hotdog(\'s) sold in front of $'..(HotdogsForSale * SellingPrice)..',-', 'success')
                     TriggerServerEvent('qb-hotdogjob:server:Sell', HotdogsForSale, SellingPrice)
                     SellingData.HasTarget = false
@@ -540,7 +540,7 @@ function SellToPed(ped)
                     break
                 end
 
-                if IsControlJustPressed(0, Keys["8"]) or IsDisabledControlJustPressed(0, Keys["8"]) then
+                if IsControlJustPressed(0, 162) or IsDisabledControlJustPressed(0, 162) then
                     QBCore.Functions.Notify('Customer Refused!', 'error')
                     SellingData.HasTarget = false
 
