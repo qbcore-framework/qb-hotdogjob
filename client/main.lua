@@ -58,17 +58,6 @@ AddEventHandler('QBCore:Client:OnJobUpdate', function(JobInfo)
     UpdateBlip()
 end)
 
--- Citizen.CreateThread(function()
---     while QBCore == nil do
---         Citizen.Wait(100)
---     end
---     isLoggedIn = true
---     PlayerData = QBCore.Functions.GetPlayerData()
---     PlayerJob = PlayerData.job
---     UpdateLevel()
---     UpdateBlip()
--- end)
-
 function UpdateBlip()
     Citizen.CreateThread(function()
         local coords = Config.Locations["take"].coords
