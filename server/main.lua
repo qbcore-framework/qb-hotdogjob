@@ -103,6 +103,6 @@ AddEventHandler('qb-hotdogjob:server:UpdateReputation', function(quality)
 end)
 
 
-QBCore.Commands.Add("removestand", "", {}, false, function(source, args)
+QBCore.Commands.Add("removestand", "Delete Stand (Admin Only)", {}, false, function(source, args)
     TriggerClientEvent('qb-hotdogjob:staff:DeletStand', source)
 end, 'admin')
