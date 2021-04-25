@@ -28,8 +28,6 @@ QBCore.Functions.CreateCallback('qb-hotdogjob:server:BringBack', function(source
 
     if Bail[Player.PlayerData.citizenid] then
         Player.Functions.AddMoney('bank', Config.Bail)
-        -- Player.Functions.AddItem("cash", Config.Bail, false) 
-		-- TriggerClientEvent('inventory:client:ItemBox', source, QBCore.Shared.Items['cash'], "add")
         cb(true)
     else
         cb(false)
@@ -41,9 +39,7 @@ AddEventHandler('qb-hotdogjob:server:Sell', function(Amount, Price)
     local src = source
     local Player = QBCore.Functions.GetPlayer(src)
 
-    --Player.Functions.AddMoney('cash', tonumber(Amount * Price))
-    Player.Functions.AddItem("cash", tonumber(Amount * Price), false) 
-	TriggerClientEvent('inventory:client:ItemBox', source, QBCore.Shared.Items['cash'], "add")
+    Player.Functions.AddMoney('cash', tonumber(Amount * Price))
 end)
 
 local Reset = false
