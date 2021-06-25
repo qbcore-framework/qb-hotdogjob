@@ -434,12 +434,10 @@ function SellToPed(ped)
             SetEntityAsNoLongerNeeded(ped)
             ClearPedTasksImmediately(ped)
             table.insert(SellingData.RecentPeds, ped)
-            SellingData = {
-                Enabled = false,
-                Target = nil,
-                HasTarget = false,
-                Hotdog = nil,
-            }
+	    SellingData.Enabled = false
+	    SellingData.Target = nil
+	    SellingData.HasTarget = false
+	    SellingData.Hotdog = nil
             QBCore.Functions.Notify('You are too far from your stall ...', 'error')
             break
         end
@@ -547,12 +545,10 @@ function SellToPed(ped)
                     SetEntityAsNoLongerNeeded(ped)
                     ClearPedTasksImmediately(ped)
                     table.insert(SellingData.RecentPeds, ped)
-                    SellingData = {
-                        Enabled = false,
-                        Target = nil,
-                        HasTarget = false,
-                        Hotdog = nil,
-                    }
+	    	    SellingData.Enabled = false
+	    	    SellingData.Target = nil
+	    	    SellingData.HasTarget = false
+	    	    SellingData.Hotdog = nil
                 QBCore.Functions.Notify('You are too far from your stall ...', 'error')
                 break
             end
@@ -563,12 +559,10 @@ function SellToPed(ped)
             SetEntityAsNoLongerNeeded(ped)
             ClearPedTasksImmediately(ped)
             table.insert(SellingData.RecentPeds, ped)
-            SellingData = {
-                Enabled = false,
-                Target = nil,
-                HasTarget = false,
-                Hotdog = nil,
-            }
+	    SellingData.Enabled = false
+	    SellingData.Target = nil
+	    SellingData.HasTarget = false
+	    SellingData.Hotdog = nil
             QBCore.Functions.Notify('You are too far from your stall ...', 'error')
             break
         end
