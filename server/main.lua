@@ -1,8 +1,3 @@
-QBCore = nil
-TriggerEvent('QBCore:GetObject', function(obj) QBCore = obj end)
-
--- Code
-
 local Bail = {}
 
 QBCore.Functions.CreateCallback('qb-hotdogjob:server:HasMoney', function(source, cb)

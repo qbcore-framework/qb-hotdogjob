@@ -1,16 +1,6 @@
-QBCore = nil
 local isLoggedIn = false
 PlayerData = {}
 PlayerJob = {}
-
-Citizen.CreateThread(function()
-    while QBCore == nil do
-    	TriggerEvent('QBCore:GetObject', function(obj) QBCore = obj end)
-    	Citizen.Wait(200)
-    end
-end)
-
--- Code
 
 local HotdogBlip = nil
 local IsWorking = false
