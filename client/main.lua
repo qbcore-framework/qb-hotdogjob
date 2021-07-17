@@ -469,7 +469,7 @@ function SellToPed(ped)
               
                 QBCore.Functions.DrawText3D(pedCoords.x, pedCoords.y, pedCoords.z, '[7] Sale '..HotdogsForSale..'x in front of $'..(HotdogsForSale * SellingPrice)..' / [8] Reject')
                 if IsControlJustPressed(0, 161) or IsDisabledControlJustPressed(0, 161) then
-                    QBCore.Functions.Notify(HotdogsForSale..'x Hotdog(\'s) sold in front of $'..(HotdogsForSale * SellingPrice)..', ', 'success')
+                    QBCore.Functions.Notify(HotdogsForSale..'x Hotdog(\'s) sold in front of $'..(HotdogsForSale * SellingPrice), 'success')
                     TriggerServerEvent('qb-hotdogjob:server:Sell', HotdogsForSale, SellingPrice)
                     SellingData.HasTarget = false
                     local Myped = PlayerPedId()
