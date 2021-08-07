@@ -610,6 +610,9 @@ function FinishMinigame(faults)
         TriggerServerEvent('qb-hotdogjob:server:UpdateReputation', Quality)
         if Config.MyLevel == 1 then
             QBCore.Functions.Notify('You have a '..Config.Stock[Quality].Label..' Hot Dog Made!')
+		TriggerServerEvent('QBCore:Server:AddItem', "hotdog", 1) --add hotdog to shared.lua
+		TriggerEvent('inventory:client:ItemBox', QBCore.Shared.Items["hotdog"], "add")
+		TriggerServerEvent("hotdog:client:removemoney")
             Config.Stock[Quality].Current = Config.Stock[Quality].Current + 1
         else
             local Luck = math.random(1, 2)
