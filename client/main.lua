@@ -326,7 +326,7 @@ function ToggleSell()
                             
                             local closestPed, closestDistance = QBCore.Functions.GetClosestPed(coords, PlayerPeds)
 
-                            if closestDistance < 15.0 and closestPed ~= 0 then
+                            if closestDistance < 15.0 and closestPed ~= 0 and not IsPedInAnyVehicle(closestPed, false) then
                                 SellToPed(closestPed)
                             end
                         end
