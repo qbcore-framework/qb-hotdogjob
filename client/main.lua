@@ -1,7 +1,6 @@
 local isLoggedIn = false
-PlayerData = {}
-PlayerJob = {}
-
+local PlayerData = {}
+local PlayerJob = {}
 local HotdogBlip = nil
 local IsWorking = false
 local StandObject = nil
