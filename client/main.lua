@@ -54,9 +54,9 @@ function UpdateBlip()
 
         HotdogBlip = AddBlipForCoord(coords.x, coords.y, coords.z)
         
-        SetBlipSprite(HotdogBlip, 93)
+        SetBlipSprite(HotdogBlip, 80)
         SetBlipDisplay(HotdogBlip, 4)
-        SetBlipScale(HotdogBlip, 0.6)
+        SetBlipScale(HotdogBlip, 0.4)
         SetBlipAsShortRange(HotdogBlip, true)
         SetBlipColour(HotdogBlip, 0)
         BeginTextCommandSetBlipName("STRING")
