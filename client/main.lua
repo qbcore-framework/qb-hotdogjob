@@ -53,7 +53,7 @@ function UpdateBlip()
         end
 
         HotdogBlip = AddBlipForCoord(coords.x, coords.y, coords.z)
-        
+
         SetBlipSprite(HotdogBlip, 93)
         SetBlipDisplay(HotdogBlip, 4)
         SetBlipScale(HotdogBlip, 0.6)
@@ -154,7 +154,7 @@ function StartWorking()
             local PlayerPed = PlayerPedId()
             local SpawnCoords = Config.Locations["spawn"].coords
             IsWorking = true
-        
+
             LoadModel("prop_hotdogstand_01")
             StandObject = CreateObject(GetHashKey('prop_hotdogstand_01'), SpawnCoords.x, SpawnCoords.y, SpawnCoords.z, true)
             PlaceObjectOnGroundProperly(StandObject)
@@ -319,10 +319,10 @@ function ToggleSell()
                             if next(PlayerPeds) == nil then
                                 for _, player in ipairs(GetActivePlayers()) do
                                     local ped = GetPlayerPed(player)
-                                    table.insert(PlayerPeds, ped)
+                                    PlayerPeds[#PlayerPeds+1] = ped
                                 end
                             end
-                            
+
                             local closestPed, closestDistance = QBCore.Functions.GetClosestPed(coords, PlayerPeds)
 
                             if closestDistance < 15.0 and closestPed ~= 0 and not IsPedInAnyVehicle(closestPed, false) then
@@ -348,10 +348,10 @@ function GetAvailableHotdog()
     local AvailableHotdogs = {}
     for k, v in pairs(Config.Stock) do
         if v.Current > 0 then
-            table.insert(AvailableHotdogs, {
+            AvailableHotdogs[#AvailableHotdogs+1] = {
                 key = k,
                 value = v,
-            })
+            }
         end
     end
     if next(AvailableHotdogs) ~= nil then
@@ -370,7 +370,7 @@ function SellToPed(ped)
                 SellingData.HasTarget = false
                 return
             end
-        end   
+        end
     end
 
     SetEntityAsNoLongerNeeded(ped)
@@ -387,7 +387,7 @@ function SellToPed(ped)
     SellingData.Hotdog = GetAvailableHotdog()
 
     if SellingData.Hotdog ~= nil then
-        if Config.Stock[SellingData.Hotdog].Current > 1 then 
+        if Config.Stock[SellingData.Hotdog].Current > 1 then
             if Config.Stock[SellingData.Hotdog].Current >= 3 then
                 HotdogsForSale = math.random(1, 3)
             else
@@ -414,7 +414,7 @@ function SellToPed(ped)
         local playercoords = GetEntityCoords(PlayerPedId())
         coords = GetOffsetFromEntityInWorldCoords(StandObject, OffsetData.x, OffsetData.y, OffsetData.z)
         PlayerDist = #(playercoords - coords)
-        pedCoords = GetEntityCoords(ped)    
+        pedCoords = GetEntityCoords(ped)
         TaskGoStraightToCoord(ped, coords, 1.2, -1, 0.0, 0.0)
         pedDist = #(coords - pedCoords)
         if PlayerDist > 10.0 then
@@ -422,7 +422,7 @@ function SellToPed(ped)
             SetPedKeepTask(ped, false)
             SetEntityAsNoLongerNeeded(ped)
             ClearPedTasksImmediately(ped)
-            table.insert(SellingData.RecentPeds, ped)
+            SellingData.RecentPeds[#SellingData.RecentPeds+1] = ped
 	    SellingData.Enabled = false
 	    SellingData.Target = nil
 	    SellingData.HasTarget = false
@@ -460,12 +460,12 @@ function SellToPed(ped)
                     elseif Config.Stock[SellingData.Hotdog].Current == 1 then
                         HotdogsForSale = 1
                     end
-            
+
                     if SellingData.Hotdog ~= nil then
                         SellingPrice = math.random(Config.Stock[SellingData.Hotdog].Price.min, Config.Stock[SellingData.Hotdog].Price.max)
                     end
                 end
-              
+
                 QBCore.Functions.DrawText3D(pedCoords.x, pedCoords.y, pedCoords.z, '[7] Sale '..HotdogsForSale..'x in front of $'..(HotdogsForSale * SellingPrice)..' / [8] Reject')
                 if IsControlJustPressed(0, 161) or IsDisabledControlJustPressed(0, 161) then
                     QBCore.Functions.Notify(HotdogsForSale..'x Hotdog(\'s) sold in front of $'..(HotdogsForSale * SellingPrice), 'success')
@@ -505,7 +505,7 @@ function SellToPed(ped)
                     SetPedKeepTask(ped, false)
                     SetEntityAsNoLongerNeeded(ped)
                     ClearPedTasksImmediately(ped)
-                    table.insert(SellingData.RecentPeds, ped)
+                    SellingData.RecentPeds[#SellingData.RecentPeds+1] = ped
                     Config.Stock[SellingData.Hotdog].Current = Config.Stock[SellingData.Hotdog].Current - HotdogsForSale
                     SellingData.Hotdog = nil
                     SellingPrice = 0
@@ -521,7 +521,7 @@ function SellToPed(ped)
                     SetPedKeepTask(ped, false)
                     SetEntityAsNoLongerNeeded(ped)
                     ClearPedTasksImmediately(ped)
-                    table.insert(SellingData.RecentPeds, ped)
+                    SellingData.RecentPeds[#SellingData.RecentPeds+1] = ped
                     SellingData.Hotdog = nil
                     SellingPrice = 0
                     HotdogsForSale = 0
@@ -533,7 +533,7 @@ function SellToPed(ped)
                     SetPedKeepTask(ped, false)
                     SetEntityAsNoLongerNeeded(ped)
                     ClearPedTasksImmediately(ped)
-                    table.insert(SellingData.RecentPeds, ped)
+                    SellingData.RecentPeds[#SellingData.RecentPeds+1] = ped
 	    	    SellingData.Enabled = false
 	    	    SellingData.Target = nil
 	    	    SellingData.HasTarget = false
@@ -547,7 +547,7 @@ function SellToPed(ped)
             SetPedKeepTask(ped, false)
             SetEntityAsNoLongerNeeded(ped)
             ClearPedTasksImmediately(ped)
-            table.insert(SellingData.RecentPeds, ped)
+            SellingData.RecentPeds[#SellingData.RecentPeds+1] = ped
 	    SellingData.Enabled = false
 	    SellingData.Target = nil
 	    SellingData.HasTarget = false
@@ -555,7 +555,7 @@ function SellToPed(ped)
             QBCore.Functions.Notify('You are too far from your stall ...', 'error')
             break
         end
-        
+
         Citizen.Wait(3)
     end
 end
@@ -677,7 +677,7 @@ function StopWorking()
                 IsPushing = false
                 IsSelling = false
                 IsUIActive = false
-        
+
                 for _, v in pairs(Config.Stock) do
                     v.Current = 0
                 end
@@ -739,19 +739,19 @@ AddEventHandler('qb-hotdogjob:staff:DeletStand', function()
     local ped = PlayerPedId()
     local pos = GetEntityCoords(ped)
     local Object = GetClosestObjectOfType(pos.x, pos.y, pos.z, 10.0, GetHashKey('prop_hotdogstand_01'), true, false, false)
-    
+
     if Object ~= nil then
         local ObjectCoords = GetEntityCoords(Object)
         local ObjectDistance = #(pos - ObjectCoords)
 
         if ObjectDistance <= 5 then
             NetworkRegisterEntityAsNetworked(Object)
-            Citizen.Wait(100)           
-            NetworkRequestControlOfEntity(Object)            
+            Citizen.Wait(100)
+            NetworkRequestControlOfEntity(Object)
             if not IsEntityAMissionEntity(Object) then
-                SetEntityAsMissionEntity(Object)        
+                SetEntityAsMissionEntity(Object)
             end
-            Citizen.Wait(100)            
+            Citizen.Wait(100)
             DeleteEntity(Object)
             QBCore.Functions.Notify('Hotdogstand mode removed!')
         end
