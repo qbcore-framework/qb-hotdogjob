@@ -1,3 +1,4 @@
+local QBCore = exports['qb-core']:GetCoreObject()
 local Bail = {}
 
 QBCore.Functions.CreateCallback('qb-hotdogjob:server:HasMoney', function(source, cb)
@@ -44,7 +45,7 @@ AddEventHandler('qb-hotdogjob:server:UpdateReputation', function(quality)
     local src = source
     local Player = QBCore.Functions.GetPlayer(src)
     local JobReputation = Player.PlayerData.metadata["jobrep"]
-    
+
     if Reset then
         JobReputation["hotdog"] = 0
         Player.Functions.SetMetaData("jobrep", JobReputation)
