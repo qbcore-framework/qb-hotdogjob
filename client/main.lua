@@ -29,22 +29,20 @@ local AnimationData = {
     anim = "pushcar_offcliff_f",
 }
 
-RegisterNetEvent('QBCore:Client:OnPlayerLoaded')
-AddEventHandler('QBCore:Client:OnPlayerLoaded', function()
+RegisterNetEvent('QBCore:Client:OnPlayerLoaded', function()
     PlayerData = QBCore.Functions.GetPlayerData()
     PlayerJob = PlayerData.job
     UpdateLevel()
     UpdateBlip()
 end)
 
-RegisterNetEvent('QBCore:Client:OnJobUpdate')
-AddEventHandler('QBCore:Client:OnJobUpdate', function(JobInfo)
+RegisterNetEvent('QBCore:Client:OnJobUpdate', function(JobInfo)
     PlayerJob = JobInfo
     UpdateBlip()
 end)
 
 function UpdateBlip()
-    Citizen.CreateThread(function()
+    CreateThread(function()
         local coords = Config.Locations["take"].coords
 
         if HotdogBlip ~= nil then
@@ -106,7 +104,7 @@ function DrawText3Ds(x, y, z, text)
     ClearDrawOrigin()
 end
 
-Citizen.CreateThread(function()
+CreateThread(function()
     while true do
         local inRange = false
         if LocalPlayer.state.isLoggedIn then
@@ -141,9 +139,9 @@ Citizen.CreateThread(function()
             end
         end
         if not inRange then
-            Citizen.Wait(1000)
+            Wait(1000)
         end
-        Citizen.Wait(3)
+        Wait(3)
     end
 end)
 
@@ -155,7 +153,7 @@ function StartWorking()
             IsWorking = true
 
             LoadModel("prop_hotdogstand_01")
-            StandObject = CreateObject(GetHashKey('prop_hotdogstand_01'), SpawnCoords.x, SpawnCoords.y, SpawnCoords.z, true)
+            StandObject = CreateObject(`prop_hotdogstand_01`, SpawnCoords.x, SpawnCoords.y, SpawnCoords.z, true)
             PlaceObjectOnGroundProperly(StandObject)
             SetEntityHeading(StandObject, SpawnCoords.w - 90)
             FreezeEntityPosition(StandObject, true)
@@ -171,7 +169,7 @@ end
 
 function UpdateUI()
     IsUIActive = true
-    Citizen.CreateThread(function()
+    CreateThread(function()
         while true do
             SendNUIMessage({
                 action = "UpdateUI",
@@ -182,17 +180,17 @@ function UpdateUI()
             if not IsUIActive then
                 break
             end
-            Citizen.Wait(1000)
+            Wait(1000)
         end
     end)
 end
 
 function HotdogLoop()
-    Citizen.CreateThread(function()
+    CreateThread(function()
         while true do
             local PlayerPed = PlayerPedId()
             local PlayerPos = GetEntityCoords(PlayerPed)
-            local ClosestObject = GetClosestObjectOfType(PlayerPos.x, PlayerPos.y, PlayerPos.z, 3.0, GetHashKey("prop_hotdogstand_01"), 0, 0, 0)
+            local ClosestObject = GetClosestObjectOfType(PlayerPos.x, PlayerPos.y, PlayerPos.z, 3.0, `prop_hotdogstand_01`, 0, 0, 0)
 
             if StandObject ~= nil then
                 if ClosestObject ~= nil and ClosestObject == StandObject then
@@ -232,13 +230,13 @@ function HotdogLoop()
                 break
             end
 
-            Citizen.Wait(3)
+            Wait(3)
         end
     end)
 
-    Citizen.CreateThread(function()
+    CreateThread(function()
         while true do
-            Citizen.Wait(0)
+            Wait(0)
             if IsPushing then
                     DisableControlAction(0, 244) -- m
                     DisableControlAction(0, 23) -- f
@@ -246,11 +244,11 @@ function HotdogLoop()
         end
     end)
 
-    Citizen.CreateThread(function()
+    CreateThread(function()
         while true do
             local PlayerPed = PlayerPedId()
             local PlayerPos = GetEntityCoords(PlayerPed)
-            local ClosestObject = GetClosestObjectOfType(PlayerPos.x, PlayerPos.y, PlayerPos.z, 3.0, GetHashKey("prop_hotdogstand_01"), 0, 0, 0)
+            local ClosestObject = GetClosestObjectOfType(PlayerPos.x, PlayerPos.y, PlayerPos.z, 3.0, `prop_hotdogstand_01`, 0, 0, 0)
 
             if StandObject ~= nil then
                 if ClosestObject ~= nil and ClosestObject == StandObject then
@@ -272,19 +270,17 @@ function HotdogLoop()
                 break
             end
 
-            Citizen.Wait(3)
+            Wait(3)
         end
     end)
 end
 
-RegisterNetEvent('qb-hotdogjob:client:UpdateReputation')
-AddEventHandler('qb-hotdogjob:client:UpdateReputation', function(JobRep)
+RegisterNetEvent('qb-hotdogjob:client:UpdateReputation', function(JobRep)
     PlayerData.metadata["jobrep"] = JobRep
     UpdateLevel()
 end)
 
-RegisterNetEvent('qb-hotdogjob:client:ToggleSell')
-AddEventHandler('qb-hotdogjob:client:ToggleSell', function(data)
+RegisterNetEvent('qb-hotdogjob:client:ToggleSell', function(data)
     if not SellingData.Enabled then
         SellingData.Enabled = true
         ToggleSell()
@@ -307,7 +303,7 @@ function ToggleSell()
 
     if StandObject ~= nil then
         if dist < 5.0 then
-            Citizen.CreateThread(function()
+            CreateThread(function()
                 while true do
                     if SellingData.Enabled then
                         local player = PlayerPedId()
@@ -331,7 +327,7 @@ function ToggleSell()
                     else
                         break
                     end
-                    Citizen.Wait(100)
+                    Wait(100)
                 end
             end)
         else
@@ -429,7 +425,7 @@ function SellToPed(ped)
             QBCore.Functions.Notify('You are too far from your stall ...', 'error')
             break
         end
-        Citizen.Wait(100)
+        Wait(100)
     end
 
     FreezeEntityPosition(ped, true)
@@ -482,7 +478,7 @@ function SellToPed(ped)
                                 AnimPlayed = true
                             end
                             if HotdogObject == nil then
-                                HotdogObject = CreateObject(GetHashKey("prop_cs_hotdog_01"), 0, 0, 0, true, true, true)
+                                HotdogObject = CreateObject(`prop_cs_hotdog_01`, 0, 0, 0, true, true, true)
                             end
                             AttachEntityToEntity(HotdogObject, Myped, GetPedBoneIndex(Myped, 57005), 0.12, 0.0, -0.05, 220.0, 120.0, 0.0, true, true, false, true, 1, true)
                             SetTimeout(1250, function()
@@ -490,7 +486,7 @@ function SellToPed(ped)
                             end)
                         end
 
-                        Citizen.Wait(0)
+                        Wait(0)
                     end
 
                     if HotdogObject ~= nil then
@@ -555,7 +551,7 @@ function SellToPed(ped)
             break
         end
 
-        Citizen.Wait(3)
+        Wait(3)
     end
 end
 
@@ -569,14 +565,14 @@ function PrepareAnim()
     local ped = PlayerPedId()
     LoadAnim('amb@prop_human_bbq@male@idle_a')
     TaskPlayAnim(ped, 'amb@prop_human_bbq@male@idle_a', 'idle_b', 6.0, -6.0, -1, 47, 0, 0, 0, 0)
-    SpatelObject = CreateObject(GetHashKey("prop_fish_slice_01"), 0, 0, 0, true, true, true)
+    SpatelObject = CreateObject(`prop_fish_slice_01`, 0, 0, 0, true, true, true)
     AttachEntityToEntity(SpatelObject, ped, GetPedBoneIndex(ped, 57005), 0.08, 0.0, -0.02, 0.0, -25.0, 130.0, true, true, false, true, 1, true)
     PreparingAnimCheck()
 end
 
 function PreparingAnimCheck()
     PreparingFood = true
-    Citizen.CreateThread(function()
+    CreateThread(function()
         while true do
             local ped = PlayerPedId()
 
@@ -592,7 +588,7 @@ function PreparingAnimCheck()
                 break
             end
 
-            Citizen.Wait(200)
+            Wait(200)
         end
     end)
 end
@@ -649,7 +645,7 @@ function LetKraamLose()
 end
 
 function AnimLoop()
-    Citizen.CreateThread(function()
+    CreateThread(function()
         while true do
             if IsPushing then
                 local PlayerPed = PlayerPedId()
@@ -660,7 +656,7 @@ function AnimLoop()
             else
                 break
             end
-            Citizen.Wait(1000)
+            Wait(1000)
         end
     end)
 end
@@ -701,7 +697,7 @@ end
 
 local DetachKeys = {157, 158, 160, 164, 165, 73, 36, 44}
 function CheckLoop()
-    Citizen.CreateThread(function()
+    CreateThread(function()
         while true do
             if IsWorking then
                 if IsPushing then
@@ -723,21 +719,20 @@ function CheckLoop()
                         LetKraamLose()
                     end
                 else
-                    Citizen.Wait(1000)
+                    Wait(1000)
                 end
             else
                 break
             end
-            Citizen.Wait(5)
+            Wait(5)
         end
     end)
 end
 
-RegisterNetEvent('qb-hotdogjob:staff:DeletStand')
-AddEventHandler('qb-hotdogjob:staff:DeletStand', function()
+RegisterNetEvent('qb-hotdogjob:staff:DeletStand', function()
     local ped = PlayerPedId()
     local pos = GetEntityCoords(ped)
-    local Object = GetClosestObjectOfType(pos.x, pos.y, pos.z, 10.0, GetHashKey('prop_hotdogstand_01'), true, false, false)
+    local Object = GetClosestObjectOfType(pos.x, pos.y, pos.z, 10.0, `prop_hotdogstand_01`, true, false, false)
 
     if Object ~= nil then
         local ObjectCoords = GetEntityCoords(Object)
@@ -745,12 +740,12 @@ AddEventHandler('qb-hotdogjob:staff:DeletStand', function()
 
         if ObjectDistance <= 5 then
             NetworkRegisterEntityAsNetworked(Object)
-            Citizen.Wait(100)
+            Wait(100)
             NetworkRequestControlOfEntity(Object)
             if not IsEntityAMissionEntity(Object) then
                 SetEntityAsMissionEntity(Object)
             end
-            Citizen.Wait(100)
+            Wait(100)
             DeleteEntity(Object)
             QBCore.Functions.Notify('Hotdogstand mode removed!')
         end
@@ -769,13 +764,13 @@ end)
 function LoadAnim(dict)
     while not HasAnimDictLoaded(dict) do
         RequestAnimDict(dict)
-        Citizen.Wait(1)
+        Wait(1)
     end
 end
 
 function LoadModel(model)
     while not HasModelLoaded(model) do
         RequestModel(model)
-        Citizen.Wait(1)
+        Wait(1)
     end
 end

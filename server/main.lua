@@ -30,8 +30,7 @@ QBCore.Functions.CreateCallback('qb-hotdogjob:server:BringBack', function(source
     end
 end)
 
-RegisterServerEvent('qb-hotdogjob:server:Sell')
-AddEventHandler('qb-hotdogjob:server:Sell', function(Amount, Price)
+RegisterNetEvent('qb-hotdogjob:server:Sell', function(Amount, Price)
     local src = source
     local Player = QBCore.Functions.GetPlayer(src)
 
@@ -40,8 +39,7 @@ end)
 
 local Reset = false
 
-RegisterServerEvent('qb-hotdogjob:server:UpdateReputation')
-AddEventHandler('qb-hotdogjob:server:UpdateReputation', function(quality)
+RegisterNetEvent('qb-hotdogjob:server:UpdateReputation', function(quality)
     local src = source
     local Player = QBCore.Functions.GetPlayer(src)
     local JobReputation = Player.PlayerData.metadata["jobrep"]
