@@ -6,7 +6,12 @@ version '1.0.0'
 
 ui_page 'html/ui.html'
 
-shared_script 'config.lua'
+shared_scripts {
+    '@qb-core/shared/locale.lua',
+    'locales/en.lua',
+    'config.lua'
+}
+
 client_script 'client/main.lua'
 server_script 'server/main.lua'
 

@@ -25,7 +25,7 @@ Config.Stock = {
             [3] = 45,
             [4] = 60,
         },
-        Label = "Perfect (A)",
+        Label = Lang:t("info.label_a"),
         Price = {
             [1] = {
                 min = 8,
@@ -53,7 +53,7 @@ Config.Stock = {
             [3] = 45,
             [4] = 60,
         },
-        Label = "Rare (B)",
+        Label = Lang:t("info.label_b"),
         Price = {
             [1] = {
                 min = 6,
@@ -81,7 +81,7 @@ Config.Stock = {
             [3] = 45,
             [4] = 60,
         },
-        Label = "Common (C)",
+        Label = Lang:t('info.label_c'),
         Price = {
             [1] = {
                 min = 4,
