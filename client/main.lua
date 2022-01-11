@@ -1,11 +1,9 @@
 local QBCore = exports['qb-core']:GetCoreObject()
 local PlayerData = {}
-local PlayerJob = {}
 local HotdogBlip = nil
 local IsWorking = false
 local StandObject = nil
 local IsPushing = false
-local IsSelling = false
 local IsUIActive = false
 local PreparingFood = false
 local SpatelObject = nil
@@ -22,7 +20,6 @@ local OffsetData = {
     z = 1.0,
     Distance = 2
 }
-local LastStandPos = nil
 
 local AnimationData = {
     lib = "missfinale_c2ig_11",
@@ -79,13 +76,11 @@ end
 
 RegisterNetEvent('QBCore:Client:OnPlayerLoaded', function()
     PlayerData = QBCore.Functions.GetPlayerData()
-    PlayerJob = PlayerData.job
     UpdateLevel()
     UpdateBlip()
 end)
 
 RegisterNetEvent('QBCore:Client:OnJobUpdate', function(JobInfo)
-    PlayerJob = JobInfo
     UpdateBlip()
 end)
 
@@ -671,7 +666,6 @@ function StopWorking()
                 IsWorking = false
                 StandObject = nil
                 IsPushing = false
-                IsSelling = false
                 IsUIActive = false
 
                 for _, v in pairs(Config.Stock) do
@@ -687,7 +681,6 @@ function StopWorking()
         IsWorking = false
         StandObject = nil
         IsPushing = false
-        IsSelling = false
         IsUIActive = false
 
         for _, v in pairs(Config.Stock) do
