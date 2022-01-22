@@ -48,7 +48,7 @@ function UpdateBlip()
 end
 
 function UpdateLevel()
-    local MyRep = PlayerData.metadata["hotdog"]
+    local MyRep = PlayerData.metadata["jobrep"]["hotdog"]
 
     if MyRep ~= nil then
         if MyRep >= 1 and MyRep < 50 then
