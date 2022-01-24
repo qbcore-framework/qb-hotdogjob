@@ -9,8 +9,8 @@ local Translations = {
         deposit_notreturned = 'لم يكن لديك جناح هوت دوج',
     },
     success = {
-        deposit = 'لقد دفعت إيداع 250 دولارًا!',
-        deposit_returned = 'تمت إعادة إيداعك بقيمة 250 دولارًا',
+        deposit = 'لقد دفعت إيداع %{deposit} دولارًا!',
+        deposit_returned = 'تمت إعادة إيداعك بقيمة %{deposit} دولارًا',
         sold_hotdogs = '%{value} x Hotdog = $%{value2}',
         made_hotdog = 'هوت دوج %{value} قمت بعمل ',
         made_luck_hotdog = 'هوت دوج %{value} x %{value2} قمت بعمل ',

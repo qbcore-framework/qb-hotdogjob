@@ -9,8 +9,8 @@ local Translations = {
         deposit_notreturned = 'Du hade ingen korv-vagn',
     },
     success = {
-        deposit = 'Du betalade 250 kr i deposition!',
-        deposit_returned = 'Dina 250 kr för deposition är återlämnade till dig!',
+        deposit = 'Du betalade %{deposit} kr i deposition!',
+        deposit_returned = 'Dina %{deposit} kr för deposition är återlämnade till dig!',
         sold_hotdogs = '%{value} x varmkorv(\ar) såldes för %{value2} kr',
         made_hotdog = 'Du gjorde %{value} varmkorvar',
         made_luck_hotdog = 'Du gjorde %{value} x %{value2} Varmkorvar',
