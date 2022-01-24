@@ -27,24 +27,28 @@ local AnimationData = {
 }
 
 function UpdateBlip()
-    CreateThread(function()
-        local coords = Config.Locations["take"].coords
+    if PlayerData.job.name == 'hotdog' then
+        CreateThread(function()
+            local coords = Config.Locations["take"].coords
 
-        if HotdogBlip ~= nil then
-            RemoveBlip(HotdogBlip)
-        end
+            if HotdogBlip ~= nil then
+                RemoveBlip(HotdogBlip)
+            end
 
-        HotdogBlip = AddBlipForCoord(coords.x, coords.y, coords.z)
+            HotdogBlip = AddBlipForCoord(coords.x, coords.y, coords.z)
 
-        SetBlipSprite(HotdogBlip, 93)
-        SetBlipDisplay(HotdogBlip, 4)
-        SetBlipScale(HotdogBlip, 0.6)
-        SetBlipAsShortRange(HotdogBlip, true)
-        SetBlipColour(HotdogBlip, 0)
-        BeginTextCommandSetBlipName("STRING")
-        AddTextComponentSubstringPlayerName(Lang:t("info.blip_name"))
-        EndTextCommandSetBlipName(HotdogBlip)
-    end)
+            SetBlipSprite(HotdogBlip, 93)
+            SetBlipDisplay(HotdogBlip, 4)
+            SetBlipScale(HotdogBlip, 0.6)
+            SetBlipAsShortRange(HotdogBlip, true)
+            SetBlipColour(HotdogBlip, 0)
+            BeginTextCommandSetBlipName("STRING")
+            AddTextComponentSubstringPlayerName(Lang:t("info.blip_name"))
+            EndTextCommandSetBlipName(HotdogBlip)
+        end)
+    else
+        RemoveBlip(HotdogBlip)
+    end
 end
 
 function UpdateLevel()
@@ -81,6 +85,7 @@ RegisterNetEvent('QBCore:Client:OnPlayerLoaded', function()
 end)
 
 RegisterNetEvent('QBCore:Client:OnJobUpdate', function(JobInfo)
+    PlayerData.job = JobInfo
     UpdateBlip()
 end)
 
@@ -104,30 +109,32 @@ CreateThread(function()
         local inRange = false
         if LocalPlayer.state.isLoggedIn then
             if Config ~= nil then
-                local PlayerPed = PlayerPedId()
-                local PlayerPos = GetEntityCoords(PlayerPed)
-                local v = Config.Locations["take"]
-                local distance = #(PlayerPos - vector3(v.coords.x, v.coords.y, v.coords.z))
-                if distance < 10 then
-                    inRange = true
-                    DrawMarker(2, v.coords.x, v.coords.y, v.coords.z, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.3, 0.3, 0.3, 255, 0, 0, 255, 0, 0, 0, 1, 0, 0, 0)
-                    if not IsWorking then
-                        if distance < OffsetData.Distance then
-                            DrawText3Ds(v.coords.x, v.coords.y, v.coords.z, Lang:t("info.start_working"))
-                            if IsControlJustPressed(0, 38) then
-                                StartWorking()
+                if PlayerData.job.name == 'hotdog' then
+                    local PlayerPed = PlayerPedId()
+                    local PlayerPos = GetEntityCoords(PlayerPed)
+                    local v = Config.Locations["take"]
+                    local distance = #(PlayerPos - vector3(v.coords.x, v.coords.y, v.coords.z))
+                    if distance < 10 then
+                        inRange = true
+                        DrawMarker(2, v.coords.x, v.coords.y, v.coords.z, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.3, 0.3, 0.3, 255, 0, 0, 255, 0, 0, 0, 1, 0, 0, 0)
+                        if not IsWorking then
+                            if distance < OffsetData.Distance then
+                                DrawText3Ds(v.coords.x, v.coords.y, v.coords.z, Lang:t("info.start_working"))
+                                if IsControlJustPressed(0, 38) then
+                                    StartWorking()
+                                end
+                            elseif distance < 3 then
+                                DrawText3Ds(v.coords.x, v.coords.y, v.coords.z, Lang:t("info.start_work"))
                             end
-                        elseif distance < 3 then
-                            DrawText3Ds(v.coords.x, v.coords.y, v.coords.z, Lang:t("info.start_work"))
-                        end
-                    else
-                        if distance < OffsetData.Distance then
-                            DrawText3Ds(v.coords.x, v.coords.y, v.coords.z, Lang:t("info.stop_working"))
-                            if IsControlJustPressed(0, 38) then
-                                StopWorking()
+                        else
+                            if distance < OffsetData.Distance then
+                                DrawText3Ds(v.coords.x, v.coords.y, v.coords.z, Lang:t("info.stop_working"))
+                                if IsControlJustPressed(0, 38) then
+                                    StopWorking()
+                                end
+                            elseif distance < 3 then
+                                DrawText3Ds(v.coords.x, v.coords.y, v.coords.z, Lang:t("info.stop_work"))
                             end
-                        elseif distance < 3 then
-                            DrawText3Ds(v.coords.x, v.coords.y, v.coords.z, Lang:t("info.stop_work"))
                         end
                     end
                 end
