@@ -9,8 +9,8 @@ local Translations = {
         deposit_notreturned = 'Não tens um stand de cachorros quentes',
     },
     success = {
-        deposit = 'Pagaste um depósito de 250€ pelo stand!',
-        deposit_returned = 'Recebeste um depósito de 250€ por entregares o stand!',
+        deposit = 'Pagaste um depósito de %{deposit}€ pelo stand!',
+        deposit_returned = 'Recebeste um depósito de %{deposit}€ por entregares o stand!',
         sold_hotdogs = '%{value} x Cachorros Quente(\'s) vendidos por %{value2}€',
         made_hotdog = 'Fizeste %{value} Cachorros Quentes',
         made_luck_hotdog = 'Fizeste %{value} x %{value2} Cachorros Quentes',

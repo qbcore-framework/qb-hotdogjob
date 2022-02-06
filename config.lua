@@ -2,7 +2,7 @@ Config = Config or {}
 
 -- Config --
 
-Config.Bail = 250
+Config.StandDeposit = 250
 
 Config.MyLevel = 1
 Config.MaxReputation = 200

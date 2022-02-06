@@ -1,11 +1,13 @@
 local QBCore = exports['qb-core']:GetCoreObject()
 local Bail = {}
 
+-- Callbacks
+
 QBCore.Functions.CreateCallback('qb-hotdogjob:server:HasMoney', function(source, cb)
     local Player = QBCore.Functions.GetPlayer(source)
 
-    if Player.PlayerData.money.bank >= Config.Bail then
-        Player.Functions.RemoveMoney('bank', Config.Bail)
+    if Player.PlayerData.money.bank >= Config.StandDeposit then
+        Player.Functions.RemoveMoney('bank', Config.StandDeposit)
         Bail[Player.PlayerData.citizenid] = true
         cb(true)
     else
@@ -18,12 +20,14 @@ QBCore.Functions.CreateCallback('qb-hotdogjob:server:BringBack', function(source
     local Player = QBCore.Functions.GetPlayer(source)
 
     if Bail[Player.PlayerData.citizenid] then
-        Player.Functions.AddMoney('bank', Config.Bail)
+        Player.Functions.AddMoney('bank', Config.StandDeposit)
         cb(true)
     else
         cb(false)
     end
 end)
+
+-- Events
 
 RegisterNetEvent('qb-hotdogjob:server:Sell', function(Amount, Price)
     local src = source
@@ -77,6 +81,8 @@ RegisterNetEvent('qb-hotdogjob:server:UpdateReputation', function(quality)
     Player.Functions.SetMetaData("jobrep", JobReputation)
     TriggerClientEvent('qb-hotdogjob:client:UpdateReputation', src, JobReputation)
 end)
+
+-- Commands
 
 QBCore.Commands.Add("removestand", Lang:t("info.command"), {}, false, function(source, args)
     TriggerClientEvent('qb-hotdogjob:staff:DeletStand', source)
