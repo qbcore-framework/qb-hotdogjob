@@ -1,5 +1,5 @@
 Config = Config or {}
-
+Config.UseTarget = GetConvar('UseTarget', 'false') == 'true'
 -- Config --
 
 Config.StandDeposit = 250
@@ -9,7 +9,7 @@ Config.MaxReputation = 200
 
 Config.Locations = {
     ["take"] = {
-        coords = vector4(38.74, -1005.49, 29.47, 264.5),
+        coords = vector4(39.31, -1005.54, 29.48, 240.57),
     },
     ["spawn"] = {
         coords = vector4(38.15, -1001.65, 29.44, 342.5),
