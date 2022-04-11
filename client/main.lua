@@ -1,5 +1,5 @@
 local QBCore = exports['qb-core']:GetCoreObject()
-local PlayerData = {}
+local PlayerData = QBCore.Functions.GetPlayerData()
 local HotdogBlip = nil
 local IsWorking = false
 local StandObject = nil
@@ -27,6 +27,17 @@ local AnimationData = {
 }
 
 local DetachKeys = {157, 158, 160, 164, 165, 73, 36, 44}
+
+-- Handlers
+
+AddEventHandler('onResourceStop', function(resource)
+    if resource == GetCurrentResourceName() then
+        if StandObject ~= nil then
+            DeleteObject(StandObject)
+            ClearPedTasksImmediately(PlayerPedId())
+        end
+    end
+end)
 
 -- Local Functions
 
@@ -731,56 +742,72 @@ RegisterNetEvent('qb-hotdogjob:staff:DeletStand', function()
     end
 end)
 
-AddEventHandler('onResourceStop', function(resource)
-    if resource == GetCurrentResourceName() then
-        if StandObject ~= nil then
-            DeleteObject(StandObject)
-            ClearPedTasksImmediately(PlayerPedId())
-        end
-    end
-end)
-
 -- Threads
 
 CreateThread(function()
-    while true do
-        local inRange = false
-        if LocalPlayer.state.isLoggedIn then
-            if Config ~= nil then
-                if PlayerData.job.name == 'hotdog' then
-                    local PlayerPed = PlayerPedId()
-                    local PlayerPos = GetEntityCoords(PlayerPed)
-                    local v = Config.Locations["take"]
-                    local distance = #(PlayerPos - vector3(v.coords.x, v.coords.y, v.coords.z))
-                    if distance < 10 then
-                        inRange = true
-                        DrawMarker(2, v.coords.x, v.coords.y, v.coords.z, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.3, 0.3, 0.3, 255, 0, 0, 255, 0, 0, 0, 1, 0, 0, 0)
+    if Config.UseTarget then
+        exports['qb-target']:AddBoxZone('hotdog_start', vector3(Config.Locations["take"].coords.x, Config.Locations["take"].coords.y, Config.Locations["take"].coords.z), 1, 1, {
+            name = 'hotdog_start',
+            debugPoly = false,
+            heading = Config.Locations["take"].coords.w,
+            minZ = Config.Locations["take"].coords.z - 1,
+            maxZ = Config.Locations["take"].coords.z + 1,
+        }, {
+            options = {
+                {
+                    label = 'Toggle Work',
+                    job = 'hotdog',
+                    icon = 'fa-solid fa-hotdog',
+                    action = function()
                         if not IsWorking then
-                            if distance < OffsetData.Distance then
-                                DrawText3Ds(v.coords.x, v.coords.y, v.coords.z, Lang:t("info.start_working"))
+                            StartWorking()
+                        else
+                            StopWorking()
+                        end
+                    end
+                }
+            },
+            distance = 2.5
+        })
+    else
+        local inZone = false
+        local hotdogStart = BoxZone:Create(vector3(Config.Locations["take"].coords.x, Config.Locations["take"].coords.y, Config.Locations["take"].coords.z), 1.0, 1.0, {
+            name="hotdog_start",
+            debugPoly = false,
+            minZ = Config.Locations["take"].coords.z - 1,
+            maxZ = Config.Locations["take"].coords.z + 1,
+        })
+
+        hotdogStart:onPlayerInOut(function(isPointInside)
+            if isPointInside then
+                inZone = true
+                if PlayerData.job.name == 'hotdog' then
+                    if not IsWorking then
+                        exports['qb-core']:DrawText(Lang:t("info.start_working"), 'left')
+                        CreateThread(function()
+                            while inZone do
+                                Wait(0)
                                 if IsControlJustPressed(0, 38) then
                                     StartWorking()
                                 end
-                            elseif distance < 3 then
-                                DrawText3Ds(v.coords.x, v.coords.y, v.coords.z, Lang:t("info.start_work"))
                             end
-                        else
-                            if distance < OffsetData.Distance then
-                                DrawText3Ds(v.coords.x, v.coords.y, v.coords.z, Lang:t("info.stop_working"))
+                        end)
+                    else
+                        exports['qb-core']:DrawText(Lang:t("info.stop_working"), 'left')
+                        CreateThread(function()
+                            while inZone do
+                                Wait(0)
                                 if IsControlJustPressed(0, 38) then
                                     StopWorking()
                                 end
-                            elseif distance < 3 then
-                                DrawText3Ds(v.coords.x, v.coords.y, v.coords.z, Lang:t("info.stop_work"))
                             end
-                        end
+                        end)
                     end
                 end
+            else
+                inZone = false
+                exports['qb-core']:HideText()
             end
-        end
-        if not inRange then
-            Wait(1000)
-        end
-        Wait(3)
+        end)
     end
 end)
