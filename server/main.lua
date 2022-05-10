@@ -84,6 +84,6 @@ end)
 
 -- Commands
 
-QBCore.Commands.Add("removestand", Lang:t("info.command"), {}, false, function(source, args)
+QBCore.Commands.Add("removestand", Lang:t("info.command"), {}, false, function(source, _)
     TriggerClientEvent('qb-hotdogjob:staff:DeletStand', source)
 end, 'admin')

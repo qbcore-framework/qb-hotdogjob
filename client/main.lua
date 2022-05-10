@@ -320,7 +320,7 @@ local function HotdogLoop()
                                         SetPedKeepTask(SellingData.Target, false)
                                         SetEntityAsNoLongerNeeded(SellingData.Target)
                                         ClearPedTasksImmediately(SellingData.Target)
-                                        FreezeEntityPosition(ped, true)
+                                        FreezeEntityPosition(PlayerPed, true)
                                     end
                                     SellingData.Enabled = false
                                     SellingData.Target = nil
@@ -393,7 +393,6 @@ end
 local function StartWorking()
     QBCore.Functions.TriggerCallback('qb-hotdogjob:server:HasMoney', function(HasMoney)
         if HasMoney then
-            local PlayerPed = PlayerPedId()
             local SpawnCoords = Config.Locations["spawn"].coords
             IsWorking = true
 
@@ -459,13 +458,8 @@ local function SellToPed(ped)
     SetEntityAsNoLongerNeeded(ped)
     ClearPedTasks(ped)
 
-    local SellingPrice = 0
-    local HotdogsForSale = 0
-
-    local Selling = false
-    local HotdogObject = nil
-    local HotdogObject2 = nil
-    local AnimPlayed = false
+    local SellingPrice
+    local HotdogsForSale
 
     SellingData.Hotdog = GetAvailableHotdog()
 
@@ -488,8 +482,7 @@ local function SellToPed(ped)
     local coords = GetOffsetFromEntityInWorldCoords(StandObject, OffsetData.x, OffsetData.y, OffsetData.z)
     local pedCoords = GetEntityCoords(ped)
     local pedDist = #(coords - pedCoords)
-    local playercoords = GetEntityCoords(PlayerPedId())
-    local PlayerDist = #(playercoords - coords)
+    local PlayerDist
 
     TaskGoStraightToCoord(ped, coords, 1.2, -1, 0.0, 0.0)
 
@@ -556,7 +549,9 @@ local function SellToPed(ped)
                     SellingData.HasTarget = false
                     local Myped = PlayerPedId()
 
-                    Selling = true
+                    local Selling = true
+                    local HotdogObject = nil
+                    local AnimPlayed = false
 
                     while Selling do
                         if not IsEntityPlayingAnim(Myped, 'mp_common', 'givetake1_b', 3) then
@@ -580,8 +575,6 @@ local function SellToPed(ped)
                     if HotdogObject ~= nil then
                         DetachEntity(HotdogObject, 1, 1)
                         DeleteEntity(HotdogObject)
-                        AnimPlayed = false
-                        HotdogObject = nil
                     end
 
                     FreezeEntityPosition(ped, false)
@@ -591,8 +584,6 @@ local function SellToPed(ped)
                     SellingData.RecentPeds[#SellingData.RecentPeds+1] = ped
                     Config.Stock[SellingData.Hotdog].Current = Config.Stock[SellingData.Hotdog].Current - HotdogsForSale
                     SellingData.Hotdog = nil
-                    SellingPrice = 0
-                    HotdogsForSale = 0
                     break
                 end
 
@@ -606,8 +597,6 @@ local function SellToPed(ped)
                     ClearPedTasksImmediately(ped)
                     SellingData.RecentPeds[#SellingData.RecentPeds+1] = ped
                     SellingData.Hotdog = nil
-                    SellingPrice = 0
-                    HotdogsForSale = 0
                     break
                 end
             else
@@ -653,7 +642,6 @@ local function ToggleSell()
             CreateThread(function()
                 while true do
                     if SellingData.Enabled then
-                        local player = PlayerPedId()
                         local coords = GetOffsetFromEntityInWorldCoords(StandObject, OffsetData.x, OffsetData.y, OffsetData.z)
 
                         if not SellingData.HasTarget then
@@ -703,7 +691,7 @@ RegisterNetEvent('qb-hotdogjob:client:UpdateReputation', function(JobRep)
     UpdateLevel()
 end)
 
-RegisterNetEvent('qb-hotdogjob:client:ToggleSell', function(data)
+RegisterNetEvent('qb-hotdogjob:client:ToggleSell', function()
     if not SellingData.Enabled then
         SellingData.Enabled = true
         ToggleSell()
