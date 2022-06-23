@@ -545,7 +545,7 @@ local function SellToPed(ped)
                 DrawText3Ds(pedCoords.x, pedCoords.y, pedCoords.z, Lang:t("info.sell_dogs", {value = HotdogsForSale, value2 = (HotdogsForSale * SellingPrice)}))
                 if IsControlJustPressed(0, 161) or IsDisabledControlJustPressed(0, 161) then
                     QBCore.Functions.Notify(Lang:t("success.sold_hotdogs", {value = HotdogsForSale, value2 = (HotdogsForSale * SellingPrice)}), 'success')
-                    TriggerServerEvent('qb-hotdogjob:server:Sell', HotdogsForSale, SellingPrice)
+                    TriggerServerEvent('qb-hotdogjob:server:Sell', pedCoords, HotdogsForSale, SellingPrice)
                     SellingData.HasTarget = false
                     local Myped = PlayerPedId()
 
