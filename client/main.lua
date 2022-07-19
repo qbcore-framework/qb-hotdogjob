@@ -81,11 +81,11 @@ local function UpdateBlip()
 
             HotdogBlip = AddBlipForCoord(coords.x, coords.y, coords.z)
 
-            SetBlipSprite(HotdogBlip, 93)
+            SetBlipSprite(HotdogBlip, 542)
             SetBlipDisplay(HotdogBlip, 4)
             SetBlipScale(HotdogBlip, 0.6)
             SetBlipAsShortRange(HotdogBlip, true)
-            SetBlipColour(HotdogBlip, 0)
+            SetBlipColour(HotdogBlip, 17)
             BeginTextCommandSetBlipName("STRING")
             AddTextComponentSubstringPlayerName(Lang:t("info.blip_name"))
             EndTextCommandSetBlipName(HotdogBlip)
