@@ -618,7 +618,7 @@ local function SellToPed(ped)
                         zoneMade = true
                         exports['qb-target']:AddEntityZone('sellingDogPed', ped, {
                             name = 'sellingDogPed',
-                            debugPoly = true,
+                            debugPoly = false,
                         }, {
                             options = {
                                 {
