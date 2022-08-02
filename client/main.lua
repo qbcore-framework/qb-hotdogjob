@@ -174,7 +174,7 @@ if Config.UseTarget then
             LetKraamLose()
         end
     end)
-    RegisterKeyMapping('letgostand','Let go of hotdog stand', 'keyboard', 'G')
+    RegisterKeyMapping('letgostand',Lang:t("keymapping.gkey"), 'keyboard', 'G')
 end
 
 local function CheckLoop()
