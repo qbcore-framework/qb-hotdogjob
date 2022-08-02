@@ -37,6 +37,10 @@ local Translations = {
         label_b = "Rare (B)",
         label_c = "Common (C)"
     }
+        keymapping = {
+        gkey = 'Let go of hotdog stand',
+        
+    }
 }
 
 Lang = Locale:new({
