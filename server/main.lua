@@ -34,7 +34,7 @@ RegisterNetEvent('qb-hotdogjob:server:Sell', function(coords, amount, price)
     local pCoords = GetEntityCoords(GetPlayerPed(src))
     local Player = QBCore.Functions.GetPlayer(src)
     if not Player then return end
-    if #(pCoords - coords) > 2 then exports['qb-core']:ExploitBan(src, 'hotdog job') end
+    if #(pCoords - coords) > 4 then exports['qb-core']:ExploitBan(src, 'hotdog job') end
     Player.Functions.AddMoney('cash', tonumber(amount * price), 'hotdog')
 end)
 
