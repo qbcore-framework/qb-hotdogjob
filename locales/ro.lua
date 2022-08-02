@@ -40,7 +40,7 @@ local Translations = {
         label_a = "Perfect (A)",
         label_b = "Rar (B)",
         label_c = "Normal (C)"
-    }
+    },
     keymapping = {
         gkey = 'Da drumul carutului de Hot Dog',  
     }
