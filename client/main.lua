@@ -6,6 +6,7 @@ local StandObject = nil
 local IsPushing = false
 local IsUIActive = false
 local PreparingFood = false
+local zoneMade = false
 local SpatelObject = nil
 local SellingData = {
     Enabled = false,
@@ -425,7 +426,7 @@ local function StartWorking()
                                             SetPedKeepTask(SellingData.Target, false)
                                             SetEntityAsNoLongerNeeded(SellingData.Target)
                                             ClearPedTasksImmediately(SellingData.Target)
-                                            FreezeEntityPosition(PlayerPed, true)
+                                            FreezeEntityPosition(PlayerPedId(), true)
                                         end
                                         SellingData.Enabled = false
                                         SellingData.Target = nil
