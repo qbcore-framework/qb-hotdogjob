@@ -1,7 +1,9 @@
 local QBCore = exports['qb-core']:GetCoreObject()
 local PlayerData = QBCore.Functions.GetPlayerData()
+local PlayerPed = nil
 local HotdogBlip = nil
 local IsWorking = false
+local zoneMade = false
 local StandObject = nil
 local IsPushing = false
 local IsUIActive = false
@@ -161,7 +163,7 @@ local function UpdateUI()
 end
 
 local function LetKraamLose()
-    local PlayerPed = PlayerPedId()
+    PlayerPed = PlayerPedId()
     DetachEntity(StandObject)
     SetEntityCollision(StandObject, true, true)
     ClearPedTasks(PlayerPed)
@@ -214,7 +216,7 @@ local function AnimLoop()
     CreateThread(function()
         while true do
             if IsPushing then
-                local PlayerPed = PlayerPedId()
+                PlayerPed = PlayerPedId()
                 if not IsEntityPlayingAnim(PlayerPed, AnimationData.lib, AnimationData.anim, 3) then
                     LoadAnim(AnimationData.lib)
                     TaskPlayAnim(PlayerPed, AnimationData.lib, AnimationData.anim, 8.0, 8.0, -1, 50, 0, false, false, false)
@@ -260,7 +262,7 @@ local function PrepareAnim()
 end
 
 local function TakeHotdogStand()
-    local PlayerPed = PlayerPedId()
+    PlayerPed = PlayerPedId()
     IsPushing = true
     NetworkRequestControlOfEntity(StandObject)
     LoadAnim(AnimationData.lib)
@@ -311,7 +313,7 @@ end
 local function HotdogLoop()
     CreateThread(function()
         while true do
-            local PlayerPed = PlayerPedId()
+            PlayerPed = PlayerPedId()
             local PlayerPos = GetEntityCoords(PlayerPed)
             local ClosestObject = GetClosestObjectOfType(PlayerPos.x, PlayerPos.y, PlayerPos.z, 3.0, `prop_hotdogstand_01`, 0, 0, 0)
 
@@ -369,7 +371,7 @@ local function HotdogLoop()
 
     CreateThread(function()
         while true do
-            local PlayerPed = PlayerPedId()
+            PlayerPed = PlayerPedId()
             local PlayerPos = GetEntityCoords(PlayerPed)
             local ClosestObject = GetClosestObjectOfType(PlayerPos.x, PlayerPos.y, PlayerPos.z, 3.0, `prop_hotdogstand_01`, 0, 0, 0)
 
