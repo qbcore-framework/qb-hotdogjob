@@ -402,6 +402,7 @@ local function HotdogLoop()
 end
 
 local function StartWorking()
+    PlayerPed = PlayerPedId()
     QBCore.Functions.TriggerCallback('qb-hotdogjob:server:HasMoney', function(HasMoney)
         if HasMoney then
             if Config.UseTarget then
