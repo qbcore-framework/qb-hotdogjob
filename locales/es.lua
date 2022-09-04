@@ -1,44 +1,45 @@
 local Translations = {
     error = {
-        no_money = 'No tienes suficiente dinero',
-        too_far = 'Estás muy lejos de tu carrito de perros calientes',
-        no_stand = 'No tienes un carrito de perros calientes',
-        cust_refused = '¡El cliente se rehusó!',
-        no_stand_found = 'Tu carrito de perros calientes no se ve por ningún lado, ¡no recibirás tu deposito de vuelta!',
-        no_more = 'No tienes %{value} más en frente del consejo',
-        deposit_notreturned = 'No tienes un carrito de perros calientes',
-        no_dogs = 'No tienes ningún perro caliente listo'
+        no_money = 'No hay suficiente dinero',
+        too_far = 'Estás demasiado lejos de tu puesto de perritos calientes',
+        no_stand = 'No tienes un puesto de perritos calientes',
+        cust_refused = '¡Cliente rechazado!',
+        no_stand_found = 'Su puesto de perritos calientes no aparece por ningún lado, ¡No recibirá su depósito de vuelta!',
+        no_more = 'No tiene %{valor} más sobre esto frente al consejo',
+        deposit_notreted = 'Usted no tenía un puesto de perritos calientes',
+        no_dogs = 'Usted no tiene ningún hotdogs',
     },
     success = {
-        deposit = '¡Has pagado un deposito de $%{deposit}!',
-        deposit_returned = '¡Tu deposito de $%{deposit} ha sido devuelto!',
-        sold_hotdogs = '%{value} x perro(s) caliente(s) vendido(s) por $%{value2}',
-        made_hotdog = 'Hiciste un perro caliente de calidad %{value}',
-        made_luck_hotdog = 'Hiciste %{value} x %{value2} perro(s) caliente(s)'
+        deposit = '¡Ha pagado un depósito de $%{deposit}!',
+        deposit_returned = '¡Su depósito de $%{deposit} ha sido devuelto!',
+        sold_hotdogs = '%{value} x Hotdog(s) vendidos por $%{value2}',
+        made_hotdog = 'Has hecho un %{valor} perritos calientes',
+        made_luck_hotdog = 'Has hecho %{valor} x %{valor2} perritos calientes',
     },
     info = {
-        command = "Borrar carrito (Admin)",
-        blip_name = 'Carrito de perros calientes',
-        start_working = '[E] Comenzar a trabajar',
-        start_work = 'Comenzar a trabajar',
+        comando = "Borrar puesto (sólo para administradores)",
+        blip_name = 'Puesto de perritos calientes',
+        start_working = '[E] Empezar a trabajar',
+        start_work = 'Empezar a trabajar',
         stop_working = '[E] Dejar de trabajar',
         stop_work = 'Dejar de trabajar',
-        grab_stall = '[G] Agarrar carrito',
-        drop_stall = '[G] Soltar carrito',
-        grab = 'Agarrar carrito',
-        prepare = 'Agarrar carrito',
-        toggle_sell = 'Habilitar/deshabilitar ventas',
-        selling_prep = '[E] Preparar perro caliente [Estado: Vendiendo]',
-        not_selling = '[E] Preparar perro caliente [Estado: Cerrado]',
-        sell_dogs = '[7] Vender %{value} x perro(s) caliente(s) por $%{value2} / [8] Rechazar',
-        sell_dogs_target = 'Vender %{value} x perro(s) caliente(s) por $%{value2}',
-        admin_removed = "Carrito de perros calientes eliminado",
-        label_a = "perfecta (A)",
-        label_b = "media (B)",
-        label_c = "común (C)"
+        grab_stall = '[~g~G~s~] Tomar puesto',
+        drop_stall = '[~g~G~s~] dejar puesto',
+        grab = 'Puesto de agarre',
+        prepare = 'Preparar perro caliente',
+        toggle_sell = 'Alternar la venta',
+        selling_prep = '[~g~E~s~] preparar perro caliente [Venta: ~g~Vendiendo~w~]',
+        not_selling = '[~g~E~s~] Hotdog prepare [Sale: ~r~Not Selling~w~]',
+        sell_dogs = '[~g~7~s~] Vender %{value} x perros caliente por $%{value2} / [~g~8~s~] Rechazar',
+        sell_dogs_target = 'Vender %{value} x perros caliente por $%{value2}',
+        admin_removed = "Puesto de perritos calientes eliminado",
+        label_a = "Perfecto (A)",
+        label_b = "Raro (B)",
+        label_c = "Común (C)"
     },
-    keymapping = {
-        gkey = 'Soltar el carrito de perros calientes'
+        keymapping = {
+        gkey = 'Deja el puesto de perritos calientes',
+        
     }
 }
 
