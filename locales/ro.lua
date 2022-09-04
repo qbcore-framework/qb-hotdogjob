@@ -42,7 +42,7 @@ local Translations = {
         label_c = "Normal (C)"
     },
     keymapping = {
-        gkey = 'Da drumul carutului de Hot Dog',  
+        gkey = 'Da drumul carutului de Hot Dog',
     }
 }
 
