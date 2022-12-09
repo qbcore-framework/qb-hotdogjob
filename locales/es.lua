@@ -17,7 +17,7 @@ local Translations = {
         made_luck_hotdog = 'Has hecho %{valor} x %{valor2} perritos calientes',
     },
     info = {
-        comando = "Borrar puesto (sólo para administradores)",
+        command = "Borrar puesto (sólo para administradores)",
         blip_name = 'Puesto de perritos calientes',
         start_working = '[E] Empezar a trabajar',
         start_work = 'Empezar a trabajar',
