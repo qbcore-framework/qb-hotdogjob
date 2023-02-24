@@ -270,6 +270,7 @@ local function TakeHotdogStand()
         AttachEntityToEntity(StandObject, PlayerPed, GetPedBoneIndex(PlayerPed, 28422), -0.45, -1.2, -0.82, 180.0, 180.0, 270.0, false, false, false, false, 1, true)
     end)
     FreezeEntityPosition(StandObject, false)
+    FreezeEntityPosition(PlayerPed, false)
     AnimLoop()
 end
 
