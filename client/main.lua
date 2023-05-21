@@ -433,8 +433,10 @@ local function StartWorking()
                                         SellingData.Target = nil
                                         SellingData.HasTarget = false
                                         TakeHotdogStand()
+                                        QBCore.Functions.Notify(Lang:t('info.drop_stall'), 'primary', 4000)
                                     else
                                         TakeHotdogStand()
+                                        QBCore.Functions.Notify(Lang:t('info.drop_stall'), 'primary', 4000)
                                     end
                                 else
                                     LetKraamLose()
@@ -645,7 +647,7 @@ local function SellToPed(ped)
                                 },
                                 {
                                     icon = 'fas fa-x',
-                                    label = 'Decline offer',
+                                    label = Lang:t('info.decline_offer'),
                                     action = function(entity)
                                         QBCore.Functions.Notify(Lang:t("error.cust_refused"), 'error')
                                         SellingData.HasTarget = false
@@ -734,6 +736,7 @@ local function SellToPed(ped)
                 SellingData.HasTarget = false
                 SellingData.Hotdog = nil
                 QBCore.Functions.Notify(Lang:t("error.no_dogs"), 'error')
+                QBCore.Functions.Notify(Lang:t('info.no_selling'), 'primary', 4000)
                 break
             end
         else
@@ -748,6 +751,7 @@ local function SellToPed(ped)
             SellingData.HasTarget = false
             SellingData.Hotdog = nil
             QBCore.Functions.Notify(Lang:t("error.too_far"), 'error')
+            QBCore.Functions.Notify(Lang:t('info.no_selling'), 'primary', 4000)
             break
         end
 
@@ -818,6 +822,7 @@ RegisterNetEvent('qb-hotdogjob:client:ToggleSell', function()
     if not SellingData.Enabled then
         SellingData.Enabled = true
         ToggleSell()
+        QBCore.Functions.Notify(Lang:t('info.selling'), 'primary', 4000)
     else
         if SellingData.Target ~= nil then
             SetPedKeepTask(SellingData.Target, false)
@@ -827,6 +832,7 @@ RegisterNetEvent('qb-hotdogjob:client:ToggleSell', function()
         SellingData.Enabled = false
         SellingData.Target = nil
         SellingData.HasTarget = false
+        QBCore.Functions.Notify(Lang:t('info.no_selling'), 'primary', 4000)
     end
 end)
 
@@ -866,7 +872,7 @@ CreateThread(function()
         }, {
             options = {
                 {
-                    label = 'Toggle Work',
+                    label = Lang:t('info.toggle_work'),
                     job = 'hotdog',
                     icon = 'fa-solid fa-hotdog',
                     action = function()
