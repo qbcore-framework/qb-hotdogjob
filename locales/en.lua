@@ -1,11 +1,11 @@
 local Translations = {
     error = {
         no_money = 'Not enough money',
-        too_far = 'You are too far from your Hot Dog Stand',
+        too_far = 'You are too far from your hotdog stand',
         no_stand = 'You do not have a hotdog stand',
         cust_refused = 'Customer Refused!',
         no_stand_found = 'Your hot dog stand was nowhere to be seen, You will not receive your deposit back!',
-        no_more = 'You have no %{value} more about this in front of council',
+        no_more = 'You have no more hotdogs of %{value} quality',
         deposit_notreturned = 'You did not have a Hot Dog Stand',
         no_dogs = 'You do not have any hotdogs',
     },
@@ -23,7 +23,7 @@ local Translations = {
         start_work = 'Start Working',
         stop_working = '[E] Stop Working',
         stop_work = 'Stop Working',
-        grab_stall = '[~g~G~s~] Grab Stall',
+        grab_stall = '[G] Grab Stall',
         drop_stall = '[~g~G~s~] Release Stall',
         grab = 'Grab Stall',
         prepare = 'Prepare Hotdog',
@@ -35,7 +35,11 @@ local Translations = {
         admin_removed = "Hot Dog Stand Removed",
         label_a = "Perfect (A)",
         label_b = "Rare (B)",
-        label_c = "Common (C)"
+        label_c = "Common (C)",
+        toggle_work = "Toggle Work",
+        selling = "You are now selling hotdogs",
+        no_selling = "You are no longer selling hotdogs",
+        decline_offer = 'Decline offer',
     },
         keymapping = {
         gkey = 'Let go of hotdog stand',
