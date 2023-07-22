@@ -126,8 +126,6 @@ local function UpdateLevel()
             Config.MyLevel = 2
         elseif MyRep >= 100 and MyRep < 200 then
             Config.MyLevel = 3
-        elseif MyRep >= 100 and MyRep < 200 then
-            Config.MyLevel = 3
         elseif MyRep >= 200 then
             Config.MyLevel = 4
         end
