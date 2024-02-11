@@ -1,7 +1,8 @@
 fx_version 'cerulean'
 game 'gta5'
-
-description 'QB-HotdogJob'
+lua54 'yes'
+author 'Kakarot'
+description 'Allows players to sell hotdogs to npcs for money'
 version '1.2.2'
 
 ui_page 'html/ui.html'
@@ -28,5 +29,3 @@ files {
     'html/ui.js',
     'html/icon.png',
 }
-
-lua54 'yes'
