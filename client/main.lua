@@ -304,8 +304,9 @@ end
 
 local function StartHotdogMinigame()
     PrepareAnim()
-    TriggerEvent('qb-keyminigame:show')
-    TriggerEvent('qb-keyminigame:start', FinishMinigame)
+    local result = exports['qb-minigames']:KeyMinigame(10)
+    if result.quit then return end
+    FinishMinigame(result.faults)
 end
 
 local function HotdogLoop()
