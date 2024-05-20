@@ -117,7 +117,7 @@ local function GetAvailableHotdog()
 end
 
 local function UpdateLevel()
-    local MyRep = PlayerData.metadata['jobrep']['hotdog']
+    local MyRep = PlayerData.metadata['rep']['hotdog']
 
     if MyRep ~= nil then
         if MyRep >= 1 and MyRep < 50 then
@@ -799,7 +799,6 @@ end
 
 RegisterNetEvent('QBCore:Client:OnPlayerLoaded', function()
     PlayerData = QBCore.Functions.GetPlayerData()
-    UpdateLevel()
     UpdateBlip()
 end)
 
@@ -809,7 +808,7 @@ RegisterNetEvent('QBCore:Client:OnJobUpdate', function(JobInfo)
 end)
 
 RegisterNetEvent('qb-hotdogjob:client:UpdateReputation', function(JobRep)
-    PlayerData.metadata['jobrep'] = JobRep
+    PlayerData.metadata['rep'] = JobRep
     UpdateLevel()
 end)
 
